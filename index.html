@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- displays site properly based on user's device -->
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="./style.css">
+   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+   <title>Frontend Mentor | Todo app</title>
+</head>
+
+<body>
+
+   <section class="todo-section">
+      <!-- Intro -->
+      <div class="intro">
+         <h1>Todo</h1>
+         <img src="./images/icon-moon.svg" class="theme-img" id="toggle-theme" alt="Moon">
+      </div>
+
+      <!-- Form input -->
+      <form class="todo-form" id="todo-form">
+         <span class="todo-check"></span>
+         <input type="text" class="todo-input" id="todo" placeholder="Create a new todo...">
+      </form>
+
+      <!-- Todo card -->
+      <div class="todo-card">
+         <!-- Todo list -->
+         <ul class="todo-list"></ul>
+
+         <nav class="todo-nav">
+            <p class="items-left"><span class="total">0</span> items left</p>
+            <!-- Menu (tersembunyi pada XS device)  -->
+            <ul class="todo-categories xs-hidden">
+               <li><a href="#" data-category="all" class="todo-category active">All</a></li>
+               <li><a href="#" data-category="active" class="todo-category">Active</a></li>
+               <li><a href="#" data-category="completed" class="todo-category">Completed</a></li>
+            </ul>
+            <a href="#" class="clear-completed">Clear Completed</a>
+         </nav>
+      </div>
+
+      <!-- Menu (tersembunyi pada SM device & diatasnya) -->
+      <ul class="todo-categories sm-hidden">
+         <li><a href="#" data-category="all" class="todo-category active">All</a></li>
+         <li><a href="#" data-category="active" class="todo-category">Active</a></li>
+         <li><a href="#" data-category="completed" class="todo-category">Completed</a></li>
+      </ul>
+
+      <!-- Text info -->
+      <p class="info">Drag and drop to reorder list</p>
+   </section>
+
+   <script src="./app.js"></script>
+</body>
+
+</html>
