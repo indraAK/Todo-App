@@ -18,7 +18,7 @@ Aplikasi web ini saya buat guna memenuhi challenge dari [Frontend Mentor](https:
 -  Drag and drop untuk mengurutkan ulang todo / kegiatan pada list
 
 
-## Dibuat menggunakan 👋
+## Dibuat menggunakan 💻
 
 - HTML
 - CSS
