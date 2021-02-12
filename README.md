@@ -1,4 +1,4 @@
-# Apa itu - Todo app
+# Apa itu - Todo App
 
 Sebuah aplikasi web untuk mencatat dan mengatur agenda kegiatan.
 
@@ -12,10 +12,10 @@ Aplikasi web ini saya buat guna memenuhi challenge dari [Frontend Mentor](https:
 - Tambah todo / kegiatan baru
 - Tandai todo / kegiatan yang sudah diselesaikan
 - Hapus todo / kegiatan dari list
-- Filter todo / kegiatan berdasarkan (all|active|completed)
+- Filter todo / kegiatan berdasarkan (all | active | completed)
 - Hapus semua todo / kegiatan yang sudah diselesaikan
 - Dark mode
--  Drag and drop untuk mengurutkan ulang todo / kegiatan pada list
+- Drag and drop untuk mengurutkan ulang todo / kegiatan pada list
 
 
 ## Dibuat menggunakan 💻
@@ -23,3 +23,11 @@ Aplikasi web ini saya buat guna memenuhi challenge dari [Frontend Mentor](https:
 - HTML
 - CSS
 - JavaScript (Vanilla JS)
+
+## Tampilan Aplikasi
+
+- Desktop :
+  - [Light](./design/desktop-design-light.jpg)
+  - [Dark](./design/desktop-design-dark.jpg)
+
+
