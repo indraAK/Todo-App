@@ -44,6 +44,6 @@ Aplikasi web ini saya buat guna memenuhi challenge dari [Frontend Mentor](https:
   
   - Dark 
   
-    ![Dark](./design/mobile-design-light.jpg)
+    ![Dark](./design/mobile-design-dark.jpg)
 
 
