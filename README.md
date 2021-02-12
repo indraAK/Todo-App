@@ -27,7 +27,9 @@ Aplikasi web ini saya buat guna memenuhi challenge dari [Frontend Mentor](https:
 ## Tampilan Aplikasi
 
 - Desktop :
-  - ![Light](./design/desktop-design-light.jpg)
-  - ![Dark](./design/desktop-design-dark.jpg)
+  - Light
+    ![Light](./design/desktop-design-light.jpg)
+  - Dark
+  ![Dark](./design/desktop-design-dark.jpg)
 
 
