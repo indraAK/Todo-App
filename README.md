@@ -29,17 +29,21 @@ Aplikasi web ini saya buat guna memenuhi challenge dari [Frontend Mentor](https:
 - Desktop :
 
   - Light
+  
     ![Light](./design/desktop-design-light.jpg)
     
   - Dark
-  ![Dark](./design/desktop-design-dark.jpg)
+  
+    ![Dark](./design/desktop-design-dark.jpg)
  
 - Mobile :
   
   - Light
+  
     ![Light](./design/mobile-design-light.jpg)
   
   - Dark 
+  
     ![Dark](./design/mobile-design-light.jpg)
 
 
