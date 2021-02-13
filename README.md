@@ -15,7 +15,7 @@ Aplikasi web ini saya buat guna memenuhi challenge dari [Frontend Mentor](https:
 - Filter todo / kegiatan berdasarkan (all | active | completed)
 - Hapus semua todo / kegiatan yang sudah diselesaikan
 - Dark mode
-- Drag and drop untuk mengurutkan ulang todo / kegiatan pada list
+- Drag and drop todo (hanya bisa berfungsi di laptop / desktop browser)
 
 
 ## Dibuat menggunakan 💻
