@@ -7,6 +7,36 @@ const todoCategories = document.querySelectorAll('.todo-category');
 let index = 0;
 let todos = [];
 
+getThemeFromLocalStorage();
+getTodosFromLocaleStorage();
+
+// Memuat theme yang sudah disimpan di locale storage
+function getThemeFromLocalStorage() {
+   const theme = JSON.parse(localStorage.getItem('theme')) ?? 'light';
+
+   console.log(typeof theme, theme);
+
+   if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+      toggleTheme.classList.add('dark');
+      toggleTheme.src = './images/icon-sun.svg';
+      toggleTheme.alt = 'Sun';
+   } else {
+      document.documentElement.classList.remove('dark');
+      toggleTheme.classList.remove('dark');
+      toggleTheme.src = './images/icon-moon.svg';
+      toggleTheme.alt = 'Moon';
+   }
+}
+
+// Memuat data todolist yang sudah disimpan di locale storage
+function getTodosFromLocaleStorage() {
+   todos = JSON.parse(localStorage.getItem('todos')) ?? [];
+
+   todos.forEach(todo => createElementTodo(todo));
+   updateItemsLeft();
+}
+
 // Ganti theme dark / light
 function changeTheme() {
    this.classList.toggle('dark');
@@ -15,11 +45,18 @@ function changeTheme() {
       this.src = './images/icon-sun.svg';
       this.alt = 'Sun';
       document.documentElement.classList.add('dark');
+      saveThemeToLocaleStorage('dark');
    } else {
       this.src = './images/icon-moon.svg';
       this.alt = 'Moon';
       document.documentElement.classList.remove('dark');
+      saveThemeToLocaleStorage('light');
    }
+}
+
+// Save theme ke local storage
+function saveThemeToLocaleStorage(theme) {
+   localStorage.setItem('theme', JSON.stringify(theme));
 }
 
 // Tambah todo baru
@@ -27,18 +64,27 @@ function addNewTodo(e) {
    // agar ketika di submit formnya tidak mereload halaman
    e.preventDefault();
    // ambil value todo + hapus karakter spasi yg double
-   const todo = this['todo'].value.trim().replace(/\s+\s/g, ' ');
+   const todoName = this['todo'].value.trim().replace(/\s+\s/g, ' ');
    // jika value todonya kosong, munculkan alert
-   if (todo === '') return alert('Todo tidak boleh kosong!');
+   if (todoName === '') return alert('Todo tidak boleh kosong!');
+   // jika todo sudah ada, munculkan alert
+   const sameTodo = todos.some(todo => todo.name === todoName);
+   if (sameTodo) return alert('Todo sudah ada!');
 
    // push todo ke array todos
-   todos.push(todo);
+   todos.push({ name: todoName, done: false });
 
-   createElementTodo(todo);
+   createElementTodo({ name: todoName, done: false });
    updateItemsLeft();
+   saveTodosToLocaleStorage(todos);
 
-   // clear input value
-   this['todo'].value = '';
+   // reset form
+   this.reset();
+}
+
+// Simpan todolist ke locale storage
+function saveTodosToLocaleStorage(todos) {
+   localStorage.setItem('todos', JSON.stringify(todos));
 }
 
 // Buat elemen todo item
@@ -52,12 +98,12 @@ function createElementTodo(todo) {
 
    todoItem.innerHTML = /*html*/ `
    <div class="todo-body" draggable="true" ondrag="drag(event)">
-      <input type="checkbox" id="todo-${++index}" onchange="updateItemsLeft()">
+      <input type="checkbox" id="todo-${++index}" ${todo.done ? 'checked' : ''} onchange="updateItemsLeft()" onclick="toggleDone(event)">
       <label class="todo-label" for="todo-${index}">
          <span class="todo-check"><img src="./images/icon-check.svg" alt="Check"></span>
-         <p class="todo-name">${todo}</p>
+         <p class="todo-name">${todo.name}</p>
       </label>
-      <button type="button" class="btn-delete" data-todo="${todo}" onclick="deleteTodo(this)">
+      <button type="button" class="btn-delete" data-todo="${todo.name}" onclick="deleteTodo(this)">
          <img src="./images/icon-cross.svg" alt="Icon Close">
       </button>
    </div>
@@ -83,7 +129,9 @@ function deleteTodo(e) {
    // hapus elemen li / todo-item dari DOM
    todoItem.remove();
    // hapus todo dari array todos
-   todos = todos.filter(todo => todo !== todoName);
+   todos = todos.filter(todo => todo.name !== todoName);
+   // simpan todolist ke locale storage
+   saveTodosToLocaleStorage(todos)
 
    updateItemsLeft();
 }
@@ -113,7 +161,9 @@ function clearCompletedTodo(e) {
          // hapus todo item dari DOM
          todoItem.remove();
          // hapus todo yg di checklist dari array todos
-         todos = todos.filter(todo => todo !== todoName);
+         todos = todos.filter(todo => todo.name !== todoName);
+         // simpan todolist ke locale storage
+         saveTodosToLocaleStorage(todos);
       }
    });
 }
@@ -172,6 +222,16 @@ function filterTodo(e) {
    }
 };
 
+function toggleDone(e) {
+   const el = e.target;
+   const todoName = el.closest('.todo-body').querySelector('.todo-name').textContent;
+
+   todos.forEach(todo => {
+      if (todo.name === todoName) todo.done ? todo.done = false : todo.done = true;
+      saveTodosToLocaleStorage(todos);
+   });
+}
+
 // Drag n Drop Functionality //
 function drag(e) {
    e.target.classList.add('dragged-item');
@@ -207,11 +267,32 @@ function swapItems(fromItem, toItem) {
    const todoItemOne = fromItem.closest('.todo-item');
    const todoItemTwo = toItem.closest('.todo-item');
 
+   const todoOne = fromItem.querySelector('.todo-name').textContent;
+   const todoTwo = toItem.querySelector('.todo-name').textContent;
+
    todoItemOne.removeChild(fromItem);
    todoItemTwo.removeChild(toItem);
 
    todoItemOne.appendChild(toItem);
    todoItemTwo.appendChild(fromItem);
+
+   swapTodos(todoOne, todoTwo);
+}
+
+// Swap todo
+function swapTodos(todoOne, todoTwo) {
+   const idxTodoOne = todos.findIndex(todo => todo.name === todoOne);
+   const idxTodoTwo = todos.findIndex(todo => todo.name === todoTwo);
+
+   let isDone = todos[idxTodoTwo].done;
+
+   todos[idxTodoTwo].name = todoOne;
+   todos[idxTodoTwo].done = todos[idxTodoOne].done;
+
+   todos[idxTodoOne].name = todoTwo;
+   todos[idxTodoOne].done = isDone;
+
+   saveTodosToLocaleStorage(todos);
 }
 
 // Event listeners
