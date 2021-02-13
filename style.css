@@ -93,7 +93,7 @@ a {
 
 .todo-section {
    max-width: 55rem;
-   height: 100vh;
+   min-height: 100vh;
    margin: 0 auto;
    padding: 5rem 2rem;
    display: flex;
@@ -347,7 +347,7 @@ a {
 .info {
    text-align: center;
    color: var(--info-color);
-   margin-top: 5rem;
+   padding-top: 3rem;
    font-size: 1.6rem;
    margin-top: auto;
 }
