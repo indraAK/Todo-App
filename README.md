@@ -16,7 +16,7 @@ Aplikasi web ini saya buat guna memenuhi challenge dari [Frontend Mentor](https:
 - Hapus semua todo / kegiatan yang sudah diselesaikan
 - Dark mode
 - Drag and drop todo (hanya bisa berfungsi di laptop / desktop browser)
-- Locale Storage
+- Local Storage untuk menyimpan data todo & theme
 
 
 ## Dibuat menggunakan 💻
